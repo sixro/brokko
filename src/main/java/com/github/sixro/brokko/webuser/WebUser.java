@@ -2,7 +2,7 @@ package com.github.sixro.brokko.webuser;
 
 import org.openqa.selenium.By;
 
-import java.time.Duration;
+import java.util.Map;
 
 /**
  * Represents a web user allowing to describe actions in a simple manner.
@@ -34,20 +34,11 @@ public interface WebUser {
     void waitFor(By xpath);
 
     /**
-     * Wait for the specified element to be visible in the specified timeout.
+     * Fill specified elements with specified texts.
      *
-     * @param xpath a xpath expression
-     * @param timeout max time to wait
+     * @param textsForEachElement texts for each element
      */
-    void waitFor(By xpath, Duration timeout);
-
-    /**
-     * Insert specified text in the specified element.
-     *
-     * @param text text to insert
-     * @param xpath a xpath representing the element
-     */
-    void insert(String text, By xpath);
+    void fill(Map<By, String> textsForEachElement);
 
     /**
      * Click on the specified element.

@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import java.util.Map;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -45,14 +45,9 @@ public final class SeleniumWebUser implements WebUser {
     }
 
     @Override
-    public void waitFor(By xpath, Duration timeout) {
-        WebDriverWait w = new WebDriverWait(driver, timeout.getSeconds());
-        w.until(visibilityOfElementLocated(xpath));
-    }
-
-    @Override
-    public void insert(String text, By xpath) {
-        driver.findElement(xpath).sendKeys(text);
+    public void fill(Map<By, String> textsForEachElement) {
+        textsForEachElement.forEach(
+            (xpath, text) -> driver.findElement(xpath).sendKeys(text));
     }
 
     @Override

@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents <a href="https://finecobank.com">FinecoBank S.p.a.</a> broker.
@@ -60,14 +62,10 @@ public final class FinecoBankBroker implements Broker, AutoCloseable {
         webUser.open(LOGIN_PAGE);
         webUser.waitFor(LOGIN_BUTTON);
 
-        webUser.insert(credentials.username(), LOGIN_USERNAME);
-
-        try {
-            String pwd = new String(credentials.password(), "UTF-8");
-            webUser.insert(pwd, LOGIN_PASSWORD);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("UTF-8 not supported", e);
-        }
+        Map<By, String> inputs = new HashMap<>();
+        inputs.put(LOGIN_USERNAME, credentials.username());
+        inputs.put(LOGIN_PASSWORD, asString(credentials.password()));
+        webUser.fill(inputs);
 
         webUser.click(LOGIN_BUTTON);
         webUser.waitFor(LOGOUT_BUTTON);
@@ -88,6 +86,14 @@ public final class FinecoBankBroker implements Broker, AutoCloseable {
     @Override
     public void close() {
         webUser.leave();
+    }
+
+    private String asString(byte[] bytes) {
+        try {
+            return new String(bytes, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("UTF-8 not supported", e);
+        }
     }
 
 }
