@@ -66,17 +66,32 @@
             <version>1.2.3</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Scraper -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>3.8.1</version>
+            <scope>test</scope>
         </dependency>
+
+        <!-- Scraper -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
+        </dependency>
+
+        <!-- FIXED Security Vulnerabilities -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.20</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.14</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
