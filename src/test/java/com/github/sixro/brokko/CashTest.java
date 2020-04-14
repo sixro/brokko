@@ -1,4 +1,4 @@
-package happynewproject;
+package com.github.sixro.brokko;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package happynewproject;
+package com.github.sixro.brokko;
 
 import java.util.Objects;
 
