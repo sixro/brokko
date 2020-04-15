@@ -1,11 +1,11 @@
-package com.github.sixro.brokko.webuser;
+package com.github.sixro.brokko.bot;
 
 import org.openqa.selenium.By;
 
 import java.util.Map;
 
 /**
- * Represents a web user allowing to describe actions in a simple manner.
+ * Represents a bot.
  *
  * <p>
  * This abstraction is just to simplify usage of selenium, indeed as you
@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 1.0
  */
 @SuppressWarnings("PMD.ExcessivePublicCount")
-public interface WebUser {
+public interface Bot {
 
     /**
      * Open the specified url.

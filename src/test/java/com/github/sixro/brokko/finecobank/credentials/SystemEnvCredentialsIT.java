@@ -21,7 +21,8 @@ public class SystemEnvCredentialsIT {
 
     @Test
     public void provide_credentials() {
-        SystemEnvCredentials credentials = new SystemEnvCredentials("ENV_USER", "ENV_PASSWORD");
+        SystemEnvCredentials credentials =
+            new SystemEnvCredentials("ENV_USER", "ENV_PASSWORD");
         assertEquals("user", credentials.username());
         assertArrayEquals(asBytes("passwd"), credentials.password());
     }

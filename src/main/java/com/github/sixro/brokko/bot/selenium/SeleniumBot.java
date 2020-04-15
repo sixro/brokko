@@ -1,7 +1,8 @@
-package com.github.sixro.brokko.webuser.selenium;
+package com.github.sixro.brokko.bot.selenium;
 
-import com.github.sixro.brokko.webuser.WebUser;
+import com.github.sixro.brokko.bot.Bot;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -16,10 +17,22 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
  * @since 1.0
  */
 @SuppressWarnings({ "PMD.LawOfDemeter", "PMD.ExcessivePublicCount" })
-public final class SeleniumWebUser implements WebUser {
+public final class SeleniumBot implements Bot {
+
+    private static final int TEN_SECONDS = 10;
 
     private final WebDriver driver;
     private final WebDriverWait wait;
+
+    /**
+     * Create a web user based on specified web driver.
+     *
+     * @param driver a driver
+     * @see #waitFor(By)
+     */
+    public SeleniumBot(WebDriver driver) {
+        this(driver, new WebDriverWait(driver, TEN_SECONDS));
+    }
 
     /**
      * Create a web user based on specified web driver and with the
@@ -29,7 +42,7 @@ public final class SeleniumWebUser implements WebUser {
      * @param wait   default max time to wait for visibility of elements
      * @see #waitFor(By)
      */
-    public SeleniumWebUser(WebDriver driver, WebDriverWait wait) {
+    public SeleniumBot(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
         this.wait = wait;
     }
@@ -57,7 +70,11 @@ public final class SeleniumWebUser implements WebUser {
 
     @Override
     public boolean see(By xpath) {
-        return driver.findElement(xpath).isDisplayed();
+        try {
+            return driver.findElement(xpath).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     @Override
