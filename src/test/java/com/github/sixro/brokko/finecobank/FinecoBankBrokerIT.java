@@ -34,17 +34,17 @@ public class FinecoBankBrokerIT {
         }
     }
 
+    private FinecoBankBroker newFinecoBankBroker() {
+        Credentials credentials = new SystemEnvCredentials("FB_USER", "FB_PASSWORD");
+        WebDriverManager.chromedriver().setup();
+        ChromeDriver chromeDriver = new ChromeDriver(newChromeOptions(true));
+        return new FinecoBankBroker(credentials, new SeleniumWebUser(chromeDriver, new WebDriverWait(chromeDriver, 10)));
+    }
+
     private static ChromeOptions newChromeOptions(boolean showUI) {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(showUI);
         return options;
-    }
-
-    private FinecoBankBroker newFinecoBankBroker() {
-        Credentials credentials = new SystemEnvCredentials("FB_USER", "FB_PASSWORD");
-        WebDriverManager.chromedriver().setup();
-        ChromeDriver chromeDriver = new ChromeDriver(newChromeOptions(false));
-        return new FinecoBankBroker(credentials, new SeleniumWebUser(chromeDriver, new WebDriverWait(chromeDriver, 10)));
     }
 
 }
