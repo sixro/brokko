@@ -15,8 +15,10 @@ public class FinecoBankBrokerIT {
 
     @Before
     public void setup() {
-        String credentialsAsText = System.getenv("FB_USER");
-        Assume.assumeNotNull(credentialsAsText);
+        String userEnv = System.getenv("FB_USER");
+        String pwdEnv = System.getenv("FB_PASSWORD");
+        Assume.assumeNotNull(userEnv);
+        Assume.assumeNotNull(pwdEnv);
     }
 
     @Test

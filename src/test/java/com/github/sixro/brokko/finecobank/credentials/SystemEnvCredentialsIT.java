@@ -11,8 +11,6 @@ import static org.junit.Assert.assertEquals;
 
 public class SystemEnvCredentialsIT {
 
-    public static final String TEST_ENV = "TEST_ENV";
-
     @Before
     public void setup() {
         String envUser = System.getenv("ENV_USER");
