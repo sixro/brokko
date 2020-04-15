@@ -13,7 +13,7 @@ import java.util.Map;
  * @author <a href="mailto:me@sixro.net" >Sixro</a>
  * @since 1.0
  */
-public final class BotLoggedIn implements LoggedIn {
+final class BotLoggedIn implements LoggedIn {
 
     private static final String LOGIN_PAGE =
             "https://finecobank.com/it/online/login/";
@@ -33,7 +33,7 @@ public final class BotLoggedIn implements LoggedIn {
      * @param bot         a bot
      * @param credentials some credentials
      */
-    public BotLoggedIn(Bot bot, Credentials credentials) {
+    BotLoggedIn(Bot bot, Credentials credentials) {
         this.bot = bot;
         this.credentials = credentials;
     }

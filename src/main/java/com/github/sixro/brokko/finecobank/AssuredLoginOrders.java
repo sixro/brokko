@@ -11,7 +11,7 @@ import java.util.Iterator;
  * @author <a href="mailto:me@sixro.net" >Sixro</a>
  * @since 1.0
  */
-public final class AssuredLoginOrders implements Orders {
+final class AssuredLoginOrders implements Orders {
 
     private final LoggedIn loggedIn;
     private final Orders delegate;
@@ -23,7 +23,7 @@ public final class AssuredLoginOrders implements Orders {
      * @param loggedIn a logged in
      * @param delegate a delegate orders
      */
-    public AssuredLoginOrders(LoggedIn loggedIn, Orders delegate) {
+    AssuredLoginOrders(LoggedIn loggedIn, Orders delegate) {
         this.loggedIn = loggedIn;
         this.delegate = delegate;
     }

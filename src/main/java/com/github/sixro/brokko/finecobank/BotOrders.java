@@ -19,7 +19,7 @@ import java.util.List;
  * @author <a href="mailto:me@sixro.net" >Sixro</a>
  * @since 1.0
  */
-public final class BotOrders implements Orders {
+final class BotOrders implements Orders {
 
     private static final int TEN_SECONDS = 10;
     private static final By ORDER_ROW = By.className("ordini-row");
@@ -32,7 +32,7 @@ public final class BotOrders implements Orders {
      *
      * @param webDriver a web driver
      */
-    public BotOrders(WebDriver webDriver) {
+    BotOrders(WebDriver webDriver) {
         this(webDriver, new WebDriverWait(webDriver, TEN_SECONDS));
     }
 
@@ -42,7 +42,7 @@ public final class BotOrders implements Orders {
      * @param webDriver a web driver
      * @param wait a wait impl
      */
-    public BotOrders(WebDriver webDriver, Wait<WebDriver> wait) {
+    BotOrders(WebDriver webDriver, Wait<WebDriver> wait) {
         this.webDriver = webDriver;
         this.wait = wait;
     }

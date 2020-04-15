@@ -1,5 +1,5 @@
 /**
- * Contains abstractions to represents a web user.
+ * Contains a bot.
  *
  * @author <a href="mailto:me@sixro.net" >Sixro</a>
  * @since 1.0

@@ -32,12 +32,7 @@ public final class FinecoBankBroker implements Broker {
         );
     }
 
-    /**
-     * Create this broker with specified orders.
-     *
-     * @param orders an orders implementation
-     */
-    public FinecoBankBroker(Orders orders) {
+    FinecoBankBroker(Orders orders) {
         this.orders = orders;
     }
 

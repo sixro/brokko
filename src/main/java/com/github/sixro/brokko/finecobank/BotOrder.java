@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
  * @author <a href="mailto:me@sixro.net" >Sixro</a>
  * @since 1.0
  */
-public final class BotOrder implements Order {
+final class BotOrder implements Order {
 
     @SuppressWarnings("PMD.UnusedPrivateField")
     private final WebDriver webDriver;
@@ -25,7 +25,7 @@ public final class BotOrder implements Order {
      * @param webDriver a driver
      * @param webElement a web element
      */
-    public BotOrder(WebDriver webDriver, WebElement webElement) {
+    BotOrder(WebDriver webDriver, WebElement webElement) {
         this.webDriver = webDriver;
         this.webElement = webElement;
     }
