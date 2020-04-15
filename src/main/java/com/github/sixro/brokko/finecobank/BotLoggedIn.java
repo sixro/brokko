@@ -47,10 +47,7 @@ public final class BotLoggedIn implements LoggedIn {
             bot.open(LOGIN_PAGE);
             bot.waitFor(LOGIN_BUTTON);
 
-            Map<By, String> inputs = new HashMap<>();
-            inputs.put(LOGIN_USERNAME, credentials.username());
-            inputs.put(LOGIN_PASSWORD, asString(credentials.password()));
-            bot.fill(inputs);
+            bot.fill(credentialsForm());
 
             bot.click(LOGIN_BUTTON);
 
@@ -64,6 +61,13 @@ public final class BotLoggedIn implements LoggedIn {
             String msg = "Unable to login using specified credentials";
             throw new LoginFailureException(msg);
         }
+    }
+
+    private Map<By, String> credentialsForm() {
+        Map<By, String> inputs = new HashMap<>();
+        inputs.put(LOGIN_USERNAME, credentials.username());
+        inputs.put(LOGIN_PASSWORD, asString(credentials.password()));
+        return inputs;
     }
 
     private String asString(byte[] bytes) {

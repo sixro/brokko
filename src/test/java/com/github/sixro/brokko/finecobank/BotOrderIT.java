@@ -24,7 +24,10 @@ public class BotOrderIT {
         Assume.assumeNotNull(userEnv);
         Assume.assumeNotNull(pwdEnv);
 
-        LoggedIn loggedIn = new BotLoggedIn(new SeleniumBot(WEB_DRIVER), new SystemEnvCredentials("FB_USER", "FB_PASSWORD"));
+        LoggedIn loggedIn = new BotLoggedIn(
+            new SeleniumBot(WEB_DRIVER),
+            new SystemEnvCredentials("FB_USER", "FB_PASSWORD")
+        );
         loggedIn.assure();
     }
 
@@ -50,6 +53,14 @@ public class BotOrderIT {
 
         Order order = iterator.next();
         assertFalse(order.refused());
+    }
+
+    @Test public void pending() {
+        Iterator<Order> iterator = new BotOrders(WEB_DRIVER).iterator();
+        Assume.assumeTrue(iterator.hasNext());
+
+        Order order = iterator.next();
+        assertFalse(order.pending());
     }
 
     @AfterClass
