@@ -3,6 +3,7 @@ package com.github.sixro.brokko.finecobank;
 import com.github.sixro.brokko.Order;
 import com.github.sixro.brokko.bot.selenium.SeleniumBot;
 import com.github.sixro.brokko.finecobank.credentials.SystemEnvCredentials;
+import org.junit.AfterClass;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class BotOrderIT {
         Assume.assumeTrue(iterator.hasNext());
 
         Order order = iterator.next();
-        assertTrue(! order.symbol().isEmpty());
+        assertFalse(order.symbol().isEmpty());
     }
 
     @Test public void executed() {
@@ -49,6 +50,11 @@ public class BotOrderIT {
 
         Order order = iterator.next();
         assertFalse(order.refused());
+    }
+
+    @AfterClass
+    public static void close() {
+        WEB_DRIVER.close();
     }
 
 }

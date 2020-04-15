@@ -2,6 +2,7 @@ package com.github.sixro.brokko.finecobank;
 
 import com.github.sixro.brokko.bot.selenium.SeleniumBot;
 import com.github.sixro.brokko.finecobank.credentials.SystemEnvCredentials;
+import org.junit.AfterClass;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,6 +41,11 @@ public class BotLoggedInIT {
                 wrongCredentials
         );
         loggedIn.assure();
+    }
+
+    @AfterClass
+    public static void close() {
+        WEB_DRIVER.close();
     }
 
 }
