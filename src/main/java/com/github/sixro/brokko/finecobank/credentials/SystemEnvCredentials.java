@@ -5,44 +5,37 @@ import com.github.sixro.brokko.finecobank.Credentials;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Represents credentials found in a environment variable.
- *
- * <p>
- * The format is {@code <username>/<password>}.<br>
- * E.g.
- * </p>
- * <pre>
- *     FINECOBANK_CREDENTIALS=myuser/mypwd
- * </pre>
+ * Represents credentials found in environment variables.
  *
  * @author <a href="mailto:me@sixro.net" >Sixro</a>
  * @since 1.0
  */
 public final class SystemEnvCredentials implements Credentials {
 
-    private final String environmentVariable;
+    private final String userEnvVariable;
+    private final String pwdEnvVariable;
 
     /**
      * Create credentials based on the specified environment variable.
      *
-     * @param environmentVariable an environment variable
+     * @param userEnvVariable an environment variable for user
+     * @param pwdEnvVariable an environment variable for password
      */
-    public SystemEnvCredentials(String environmentVariable) {
-        this.environmentVariable = environmentVariable;
+    public SystemEnvCredentials(String userEnvVariable, String pwdEnvVariable) {
+        this.userEnvVariable = userEnvVariable;
+        this.pwdEnvVariable = pwdEnvVariable;
     }
 
     @SuppressWarnings("PMD.LawOfDemeter")
     @Override
     public String username() {
-        String text = System.getenv(environmentVariable);
-        return text.substring(0, text.indexOf("/"));
+        return System.getenv(userEnvVariable);
     }
 
     @SuppressWarnings("PMD.LawOfDemeter")
     @Override
     public byte[] password() {
-        String text = System.getenv(environmentVariable);
-        String pwdAsText = text.substring(text.indexOf("/") + 1);
-        return pwdAsText.getBytes(StandardCharsets.UTF_8);
+        String text = System.getenv(pwdEnvVariable);
+        return text.getBytes(StandardCharsets.UTF_8);
     }
 }

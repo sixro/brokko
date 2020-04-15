@@ -1,6 +1,5 @@
 package com.github.sixro.brokko.finecobank;
 
-import com.github.sixro.brokko.finecobank.credentials.SimpleCredentials;
 import com.github.sixro.brokko.finecobank.credentials.SystemEnvCredentials;
 import com.github.sixro.brokko.webuser.selenium.SeleniumWebUser;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -16,7 +15,7 @@ public class FinecoBankBrokerIT {
 
     @Before
     public void setup() {
-        String credentialsAsText = System.getenv("FINECOBANK_CREDENTIALS");
+        String credentialsAsText = System.getenv("FB_USER");
         Assume.assumeNotNull(credentialsAsText);
     }
 
@@ -40,7 +39,7 @@ public class FinecoBankBrokerIT {
     }
 
     private FinecoBankBroker newFinecoBankBroker() {
-        Credentials credentials = new SystemEnvCredentials("FINECOBANK_CREDENTIALS");
+        Credentials credentials = new SystemEnvCredentials("FB_USER", "FB_PASSWORD");
         WebDriverManager.chromedriver().setup();
         ChromeDriver chromeDriver = new ChromeDriver(newChromeOptions(false));
         return new FinecoBankBroker(credentials, new SeleniumWebUser(chromeDriver, new WebDriverWait(chromeDriver, 10)));
