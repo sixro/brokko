@@ -9,13 +9,6 @@ package com.github.sixro.brokko;
 public interface Order {
 
     /**
-     * Returns the symbol to which this order is related.
-     *
-     * @return a symbol
-     */
-    String symbol();
-
-    /**
      * Cancel this order.
      */
     void cancel();
@@ -40,5 +33,12 @@ public interface Order {
      * @return true if the order has been refused, otherwise false
      */
     boolean refused();
+
+    /**
+     * Returns the symbol to which this order is related.
+     *
+     * @return a symbol
+     */
+    String symbol();
 
 }
