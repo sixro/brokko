@@ -10,8 +10,6 @@ public interface EntryOrder {
 
     /**
      * Enter this order.
-     *
-     * @see Broker#orders()
      */
     void enter();
 

@@ -3,8 +3,6 @@ package com.github.sixro.brokko.finecobank;
 /**
  * Represents credentials to use to log into an account in FinecoBank.
  *
- * @see FinecoBankBroker
- *
  * @author <a href="mailto:me@sixro.net" >Sixro</a>
  * @since 1.0
  */
