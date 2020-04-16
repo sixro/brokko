@@ -24,6 +24,7 @@ public final class FinecoBankOrders implements Orders {
      * @param webDriver a web driver
      * @param credentials some credentials
      */
+    @SuppressWarnings("unused")
     public FinecoBankOrders(WebDriver webDriver, Credentials credentials) {
         this(
             new BotLoggedIn(
@@ -47,7 +48,7 @@ public final class FinecoBankOrders implements Orders {
 
     @Override
     public Iterator<Order> iterator() {
-        loggedIn.assure();
+        loggedIn.ensure();
         return delegate.iterator();
     }
 

@@ -15,7 +15,7 @@ public class FinecoBankOrdersTest {
         Orders delegate = ctx.mock(Orders.class);
 
         ctx.checking(new Expectations() {{
-            oneOf(loggedIn).assure();
+            oneOf(loggedIn).ensure();
             oneOf(delegate).iterator();
         }});
 

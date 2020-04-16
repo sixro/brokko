@@ -28,7 +28,7 @@ public class BotLoggedInIT {
     }
 
     @Test public void login() {
-        loggedIn.assure();
+        loggedIn.ensure();
     }
 
     @Test(expected = LoginFailureException.class)
@@ -40,7 +40,7 @@ public class BotLoggedInIT {
             new SeleniumBot(WEB_DRIVER),
                 wrongCredentials
         );
-        loggedIn.assure();
+        loggedIn.ensure();
     }
 
     @AfterClass

@@ -28,7 +28,7 @@ public class BotOrderIT {
             new SeleniumBot(WEB_DRIVER),
             new SystemEnvCredentials("FB_USER", "FB_PASSWORD")
         );
-        loggedIn.assure();
+        loggedIn.ensure();
     }
 
     @Test public void symbol() {

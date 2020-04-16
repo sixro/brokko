@@ -39,7 +39,7 @@ final class BotLoggedIn implements LoggedIn {
     }
 
     @Override
-    public void assure() {
+    public void ensure() {
         try {
             if (bot.see(LOGOUT_BUTTON))
                 return;
