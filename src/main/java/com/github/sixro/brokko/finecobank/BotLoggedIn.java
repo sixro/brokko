@@ -56,11 +56,6 @@ final class BotLoggedIn implements LoggedIn {
             String msg = "Unable to login due to unexpected error";
             throw new LoginFailureException(msg, e);
         }
-
-        if (!bot.see(LOGOUT_BUTTON)) {
-            String msg = "Unable to login using specified credentials";
-            throw new LoginFailureException(msg);
-        }
     }
 
     private Map<By, String> credentialsForm() {
