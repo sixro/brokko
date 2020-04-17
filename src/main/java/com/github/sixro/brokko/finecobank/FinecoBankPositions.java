@@ -2,6 +2,8 @@ package com.github.sixro.brokko.finecobank;
 
 import com.github.sixro.brokko.Position;
 import com.github.sixro.brokko.Positions;
+import com.github.sixro.brokko.bot.selenium.SeleniumBot;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Iterator;
 
@@ -17,7 +19,23 @@ public final class FinecoBankPositions implements Positions {
     private final LoggedIn loggedIn;
     private final Positions delegate;
 
-    public FinecoBankPositions(LoggedIn loggedIn, Positions delegate) {
+    /**
+     * Create this object using specified web driver and credentials.
+     *
+     * @param webDriver a web driver
+     * @param credentials some credentials
+     */
+    public FinecoBankPositions(WebDriver webDriver, Credentials credentials) {
+        this(
+            new BotLoggedIn(
+                new SeleniumBot(webDriver),
+                credentials
+            ),
+            new BotPositions(webDriver)
+        );
+    }
+
+    FinecoBankPositions(LoggedIn loggedIn, Positions delegate) {
 
         this.loggedIn = loggedIn;
         this.delegate = delegate;
