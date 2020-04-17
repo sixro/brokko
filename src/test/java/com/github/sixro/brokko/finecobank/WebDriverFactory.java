@@ -5,8 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public final class WebDriverFactory {
 
@@ -15,8 +18,11 @@ public final class WebDriverFactory {
     static {
         System.setProperty(
             ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
-        java.util.logging.Logger.getLogger("org.openqa.selenium")
+        Logger.getLogger("org.openqa.selenium")
             .setLevel(Level.OFF);
+
+        LogManager.getLogManager().reset();
+        SLF4JBridgeHandler.install();
     }
 
     private WebDriverFactory() { }

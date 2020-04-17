@@ -13,4 +13,11 @@ public interface Position {
      */
     void close();
 
+    /**
+     * Returns the symbol on which this position is open.
+     *
+     * @return the symbol on which this position is open
+     */
+    String symbol();
+
 }
