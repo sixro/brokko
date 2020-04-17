@@ -14,9 +14,19 @@ import java.util.Iterator;
  */
 public final class FinecoBankPositions implements Positions {
 
+    private final LoggedIn loggedIn;
+    private final Positions delegate;
+
+    public FinecoBankPositions(LoggedIn loggedIn, Positions delegate) {
+
+        this.loggedIn = loggedIn;
+        this.delegate = delegate;
+    }
+
     @Override
     public Iterator<Position> iterator() {
-        throw new UnsupportedOperationException();
+        loggedIn.ensure();
+        return delegate.iterator();
     }
 
 }
