@@ -1,12 +1,12 @@
 package com.github.sixro.brokko.finecobank;
 
-import com.github.sixro.brokko.Positions;
+import com.github.sixro.brokko.EntryOrder;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Rule;
 import org.junit.Test;
 
-public class FinecoBankPositionsTest {
+public class FinecoBankAtMarketEntryOrderTest {
 
     @Rule
     public JUnitRuleMockery ctx = new JUnitRuleMockery();
@@ -14,15 +14,15 @@ public class FinecoBankPositionsTest {
     @Test
     public void happy_path() {
         LoggedIn loggedIn = ctx.mock(LoggedIn.class);
-        Positions delegate = ctx.mock(Positions.class);
+        EntryOrder delegate = ctx.mock(EntryOrder.class);
 
         ctx.checking(new Expectations() {{
             oneOf(loggedIn).ensure();
-            oneOf(delegate).iterator();
+            oneOf(delegate).enter();
         }});
 
-        FinecoBankPositions p = new FinecoBankPositions(loggedIn, delegate);
-        p.iterator();
+        FinecoBankAtMarketEntryOrder eo = new FinecoBankAtMarketEntryOrder(loggedIn, delegate);
+        eo.enter();
     }
 
 }
