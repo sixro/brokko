@@ -9,9 +9,35 @@ package com.github.sixro.brokko;
 public interface Order {
 
     /**
+     * Represents the status of an order.
+     */
+    enum Status {
+        /**
+         * The order has not been processed yet.
+         */
+        PENDING,
+        /**
+         * The order has been executed.
+         */
+        EXECUTED,
+        /**
+         * The order has been refused.
+         */
+        REFUSED,
+        /**
+         * The order has been cancelled.
+         *
+         * @see #cancel()
+         */
+        CANCELLED
+    }
+
+    /**
      * Cancel this order.
      */
     void cancel();
+
+    // FIXME add Status and delete the object down.
 
     /**
      * Returns true if the order is pending yet.

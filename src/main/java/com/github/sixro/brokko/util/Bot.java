@@ -1,6 +1,8 @@
-package com.github.sixro.brokko.bot;
+package com.github.sixro.brokko.util;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.Map;
 
@@ -23,8 +25,17 @@ public interface Bot {
      * Open the specified url.
      *
      * @param url a url
+     *
+     * @deprecated Use {@link #open(String, ExpectedCondition)}
      */
     void open(String url);
+    /**
+     * Open the specified url and wait for expected condition.
+     *
+     * @param url a url
+     * @param expectedCondition expected condition to wait before returning
+     */
+    void open(String url, ExpectedCondition<WebElement> expectedCondition);
 
     /**
      * Wait for the specified element to be visible.
@@ -56,8 +67,9 @@ public interface Bot {
     boolean see(By xpath);
 
     /**
-     * The user leaves.
+     * Scroll down the page of the specified amount of pixels.
+     *
+     * @param pixels number of pixels
      */
-    void leave();
-
+    void scrollDown(int pixels);
 }

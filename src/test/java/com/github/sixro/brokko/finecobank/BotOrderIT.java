@@ -1,7 +1,8 @@
 package com.github.sixro.brokko.finecobank;
 
 import com.github.sixro.brokko.Order;
-import com.github.sixro.brokko.bot.selenium.SeleniumBot;
+import com.github.sixro.brokko.Orders;
+import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import com.github.sixro.brokko.finecobank.credentials.SystemEnvCredentials;
 import org.junit.AfterClass;
 import org.junit.Assume;
@@ -40,7 +41,8 @@ public class BotOrderIT {
     }
 
     @Test public void executed() {
-        Iterator<Order> iterator = new BotOrders(WEB_DRIVER).iterator();
+        Orders.Executed orders = new Orders.Executed(new BotOrders(WEB_DRIVER));
+        Iterator<Order> iterator = orders.iterator();
         Assume.assumeTrue(iterator.hasNext());
 
         Order order = iterator.next();

@@ -1,16 +1,14 @@
 package com.github.sixro.brokko.finecobank;
 
-import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import com.github.sixro.brokko.finecobank.credentials.SystemEnvCredentials;
-import org.junit.AfterClass;
+import com.github.sixro.brokko.finecobank.pincode.SystemEnvPinCode;
+import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
-import static org.junit.Assert.*;
-
-public class BotPositionsIT {
+public class BotAtMarketEntryOrderIT {
 
     public static final WebDriver WEB_DRIVER = WebDriverFactory.chrome();
 
@@ -18,8 +16,8 @@ public class BotPositionsIT {
     public void setup() {
         String userEnv = System.getenv("FB_USER");
         String pwdEnv = System.getenv("FB_PASSWORD");
-        Assume.assumeNotNull(userEnv);
-        Assume.assumeNotNull(pwdEnv);
+        String pinCode = System.getenv("FB_PIN_CODE");
+        Assume.assumeNotNull(userEnv, pwdEnv, pinCode);
 
         LoggedIn loggedIn = new BotLoggedIn(
             new SeleniumBot(WEB_DRIVER),
@@ -28,15 +26,15 @@ public class BotPositionsIT {
         loggedIn.ensure();
     }
 
-    @Test
-    public void iterable() {
-        BotPositions positions = new BotPositions(WEB_DRIVER);
-        assertTrue(positions.iterator().hasNext());
-    }
-
-    @AfterClass
-    public static void close() {
-        //WEB_DRIVER.close();
+    @Test public void enter() {
+        BotAtMarketEntryOrder eorder = new BotAtMarketEntryOrder(
+            new SeleniumBot(WEB_DRIVER),
+            "FR0010010827",
+            "AFF",
+            1,
+            new SystemEnvPinCode("FB_PIN_CODE")
+        );
+        eorder.enter();
     }
 
 }
