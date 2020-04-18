@@ -12,12 +12,13 @@ public class OrdersWithSymbolTest {
             "ENI.MI",
             new ListOrders(
                 Arrays.asList(
-                    AnemicOrder.executed("ENI.MI"),
-                    AnemicOrder.refused("ENEL.MI")
+                    new AnemicOrder("ENI.MI", Order.Status.EXECUTED),
+                    new AnemicOrder("ENEL.MI", Order.Status.REFUSED)
                 )
             )
         );
-        Assert.assertTrue(orders.iterator().next().executed());
+        Assert.assertEquals(Order.Status.EXECUTED,
+            orders.iterator().next().status());
     }
 
 }

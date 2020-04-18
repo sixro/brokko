@@ -5,14 +5,14 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class OrdersExecutedTest {
+public class OrdersWithStatusTest {
 
     @Test public void executed() {
-        Orders orders = new Orders.Executed(
+        Orders orders = new Orders.WithStatus(Order.Status.EXECUTED,
             new ListOrders(
                 Arrays.asList(
-                    AnemicOrder.executed("ENI.MI"),
-                    AnemicOrder.refused("ENEL.MI")
+                    new AnemicOrder("ENI.MI", Order.Status.EXECUTED),
+                    new AnemicOrder("ENEL.MI", Order.Status.REFUSED)
                 )
             )
         );
@@ -20,11 +20,11 @@ public class OrdersExecutedTest {
     }
 
     @Test public void none() {
-        Orders orders = new Orders.Executed(
+        Orders orders = new Orders.WithStatus(Order.Status.EXECUTED,
             new ListOrders(
                 Arrays.asList(
-                    AnemicOrder.pending("ENI.MI"),
-                    AnemicOrder.refused("ENEL.MI")
+                    new AnemicOrder("ENI.MI", Order.Status.PENDING),
+                    new AnemicOrder("ENEL.MI", Order.Status.REFUSED)
                 )
             )
         );

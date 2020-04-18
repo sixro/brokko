@@ -43,18 +43,20 @@ public interface Orders extends Iterable<Order> {
      * @since 1.0
      */
     @SuppressWarnings("PMD.LawOfDemeter")
-    class Executed implements Orders {
+    class WithStatus implements Orders {
 
+        private final Order.Status status;
         private final Orders delegate;
 
-        public Executed(Orders delegate) {
+        public WithStatus(Order.Status status, Orders delegate) {
+            this.status = status;
             this.delegate = delegate;
         }
 
         @Override
         public Iterator<Order> iterator() {
             return StreamSupport.stream(delegate.spliterator(), false)
-                .filter(Order::executed)
+                .filter(o -> status.equals(o.status()))
                 .iterator();
         }
     }

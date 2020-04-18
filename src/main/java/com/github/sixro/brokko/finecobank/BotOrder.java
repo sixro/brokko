@@ -5,6 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Represents an order based on a bot.
  *
@@ -18,6 +21,7 @@ final class BotOrder implements Order {
     @SuppressWarnings("PMD.UnusedPrivateField")
     private final WebDriver webDriver;
     private final WebElement webElement;
+    private final Map<String, Status> statusByText;
 
     /**
      * Create a BotOrder using specified driver and web element.
@@ -26,8 +30,29 @@ final class BotOrder implements Order {
      * @param webElement a web element
      */
     BotOrder(WebDriver webDriver, WebElement webElement) {
+        this(webDriver, webElement, newMapOfStatus());
+    }
+
+    private static Map<String, Status> newMapOfStatus() {
+        Map<String, Status> map = new HashMap<>();
+        map.put("immesso", Status.PENDING);
+        map.put("accodato", Status.PENDING);
+        map.put("eseguito", Status.EXECUTED);
+        map.put("rifiutato", Status.REFUSED);
+        map.put("cancellato", Status.CANCELLED);
+        return map;
+    }
+
+    BotOrder(WebDriver webDriver, WebElement webElement, Map<String,
+        Status> statusByText) {
         this.webDriver = webDriver;
         this.webElement = webElement;
+        this.statusByText = statusByText;
+    }
+
+    @Override
+    public void cancel() {
+        throw new UnsupportedOperationException();
     }
 
     @SuppressWarnings("PMD.LawOfDemeter")
@@ -40,26 +65,11 @@ final class BotOrder implements Order {
         return isin;
     }
 
+    @SuppressWarnings("PMD.LawOfDemeter")
     @Override
-    public void cancel() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean pending() {
+    public Status status() {
         String rawStatus = rawStatus();
-        return "Immesso".equalsIgnoreCase(rawStatus) ||
-                "Accodato".equalsIgnoreCase(rawStatus);
-    }
-
-    @Override
-    public boolean executed() {
-        return "Eseguito".equalsIgnoreCase(rawStatus());
-    }
-
-    @Override
-    public boolean refused() {
-        return "Rifiutato".equalsIgnoreCase(rawStatus());
+        return statusByText.get(rawStatus.toLowerCase());
     }
 
     @SuppressWarnings("PMD.LawOfDemeter")

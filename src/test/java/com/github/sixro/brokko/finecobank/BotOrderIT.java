@@ -2,8 +2,8 @@ package com.github.sixro.brokko.finecobank;
 
 import com.github.sixro.brokko.Order;
 import com.github.sixro.brokko.Orders;
-import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import com.github.sixro.brokko.finecobank.credentials.SystemEnvCredentials;
+import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import org.junit.AfterClass;
 import org.junit.Assume;
 import org.junit.Before;
@@ -12,7 +12,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Iterator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class BotOrderIT {
 
@@ -41,28 +42,36 @@ public class BotOrderIT {
     }
 
     @Test public void executed() {
-        Orders.Executed orders = new Orders.Executed(new BotOrders(WEB_DRIVER));
+        Orders.WithStatus orders =
+            new Orders.WithStatus(Order.Status.EXECUTED,
+                new BotOrders(WEB_DRIVER));
         Iterator<Order> iterator = orders.iterator();
         Assume.assumeTrue(iterator.hasNext());
 
         Order order = iterator.next();
-        assertTrue(order.executed());
+        assertEquals(Order.Status.EXECUTED, order.status());
     }
 
     @Test public void refused() {
-        Iterator<Order> iterator = new BotOrders(WEB_DRIVER).iterator();
+        Orders.WithStatus orders =
+            new Orders.WithStatus(Order.Status.REFUSED,
+                new BotOrders(WEB_DRIVER));
+        Iterator<Order> iterator = orders.iterator();
         Assume.assumeTrue(iterator.hasNext());
 
         Order order = iterator.next();
-        assertFalse(order.refused());
+        assertEquals(Order.Status.REFUSED, order.status());
     }
 
     @Test public void pending() {
-        Iterator<Order> iterator = new BotOrders(WEB_DRIVER).iterator();
+        Orders.WithStatus orders =
+            new Orders.WithStatus(Order.Status.PENDING,
+                new BotOrders(WEB_DRIVER));
+        Iterator<Order> iterator = orders.iterator();
         Assume.assumeTrue(iterator.hasNext());
 
         Order order = iterator.next();
-        assertFalse(order.pending());
+        assertEquals(Order.Status.PENDING, order.status());
     }
 
     @AfterClass
