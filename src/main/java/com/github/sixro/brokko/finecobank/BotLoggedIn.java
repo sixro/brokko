@@ -1,6 +1,6 @@
 package com.github.sixro.brokko.finecobank;
 
-import com.github.sixro.brokko.bot.Bot;
+import com.github.sixro.brokko.util.Bot;
 import org.openqa.selenium.By;
 
 import java.io.UnsupportedEncodingException;

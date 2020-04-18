@@ -2,7 +2,7 @@ package com.github.sixro.brokko.finecobank;
 
 import com.github.sixro.brokko.Order;
 import com.github.sixro.brokko.Orders;
-import com.github.sixro.brokko.bot.selenium.SeleniumBot;
+import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Iterator;

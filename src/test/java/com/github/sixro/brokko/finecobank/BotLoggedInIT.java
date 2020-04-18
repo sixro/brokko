@@ -1,6 +1,6 @@
 package com.github.sixro.brokko.finecobank;
 
-import com.github.sixro.brokko.bot.selenium.SeleniumBot;
+import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import com.github.sixro.brokko.finecobank.credentials.SystemEnvCredentials;
 import org.junit.AfterClass;
 import org.junit.Assume;

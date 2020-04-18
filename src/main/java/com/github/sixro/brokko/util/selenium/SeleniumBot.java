@@ -1,9 +1,12 @@
-package com.github.sixro.brokko.bot.selenium;
+package com.github.sixro.brokko.util.selenium;
 
-import com.github.sixro.brokko.bot.Bot;
+import com.github.sixro.brokko.util.Bot;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
@@ -53,6 +56,13 @@ public final class SeleniumBot implements Bot {
     }
 
     @Override
+    public void open(String url,
+                     ExpectedCondition<WebElement> expectedCondition) {
+        driver.navigate().to(url);
+        wait.until(expectedCondition);
+    }
+
+    @Override
     public void waitFor(By xpath) {
         wait.until(visibilityOfElementLocated(xpath));
     }
@@ -78,8 +88,9 @@ public final class SeleniumBot implements Bot {
     }
 
     @Override
-    public void leave() {
-        driver.close();
+    public void scrollDown(int pixels) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0," + pixels + ")", "");
     }
 
 }
