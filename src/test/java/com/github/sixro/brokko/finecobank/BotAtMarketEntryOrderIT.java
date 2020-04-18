@@ -5,6 +5,7 @@ import com.github.sixro.brokko.finecobank.pincode.SystemEnvPinCode;
 import com.github.sixro.brokko.util.selenium.SeleniumBot;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -26,6 +27,7 @@ public class BotAtMarketEntryOrderIT {
         loggedIn.ensure();
     }
 
+    @Ignore("Re-enable when the cancel operation will be available")
     @Test public void enter() {
         BotAtMarketEntryOrder eorder = new BotAtMarketEntryOrder(
             new SeleniumBot(WEB_DRIVER),
